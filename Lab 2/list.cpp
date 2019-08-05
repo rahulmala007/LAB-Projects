@@ -49,7 +49,11 @@ void DelFirst()
 
 void Del(int x,int y)
 {	Node * temp;
-	if(head==NULL) cout<<"-1"<<endl;
+	if(head==NULL) 
+	{
+		cout<<"-1"<<endl;
+		return;	
+	}
 	Node* prev=head;
 	if(prev->x==x && prev->y==y) 
 	{
@@ -66,27 +70,29 @@ void Del(int x,int y)
 			check=1;
 			prev->next=temp->next;
 			free(temp);
-		}
-		else prev=prev->next;
+											}
+			else prev=prev->next;
 		}
 		
 	}
-	if(!check) cout<<"-1"<<endl;
+	if(check==0) cout<<"-1"<<endl;
 	return;
 
 }
 
-void Search(float d,Node* x)
+void Search(float d,Node* temp)
 {
-	Node* temp=x;
-	if(x==NULL) return;
+	if(temp==NULL) return;
 
 	if(dist(temp->x,temp->y)<=d) 
-		{	cout<<"("<<temp->x<<","<<temp->y<<")"<<endl;
+		{	cout<<"("<<temp->x<<","<<temp->y<<")"<<" ";
 			Search(d,temp->next);
 			return ;
 		}
-	else temp=temp->next;	
+	else{
+		Search(d,temp->next);
+		return;
+	}	
 }
 
 bool Search(int x,int y)
